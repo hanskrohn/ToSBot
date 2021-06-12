@@ -67,12 +67,13 @@ async function* getAllDataGenerator(){
         } catch (e){
             console.log(`${ALL_SERVICES_SLUGS[i]} ${e.message}. I mean that's just RIP amirite?`);
         }
+        yield i;
         i++;
     }
 }
 async function getTheData(generator){
     try{
-        if(!generator.next().done){
+        if(!(await generator.next()).done){
             setTimeout(async () => {
                 getTheData(generator)
             }, THIRTY_MIN);

@@ -27,7 +27,7 @@ mongoose.connect(process.env.MONGO_ATLAS, {
 });
 
 const ALL_SERVICES_SLUGS = [];
-const THIRTY_MIN = 5 * 60 * 1000;
+const TWO_MIN = 2 * 60 * 1000;
 let amountOfDataAdded = 0;
 
 async function main(){
@@ -41,6 +41,7 @@ async function main(){
                 ALL_SERVICES_SLUGS.push(service.slug);
             }
         });
+
         const generator = getAllDataGenerator();
         getTheData(generator)
 
@@ -50,7 +51,7 @@ async function main(){
 }
 
 async function* getAllDataGenerator(){
-    let i = 0;
+    let i = 373;
 
     while(i< ALL_SERVICES_SLUGS.length){
         try{
@@ -65,10 +66,14 @@ async function* getAllDataGenerator(){
             await newDataSet.save();
             amountOfDataAdded++;
         } catch (e){
-            console.log(`${ALL_SERVICES_SLUGS[i]} ${e.message}. I mean that's just RIP amirite?`);
+            
         }
         yield i;
         i++;
+
+        if(i%100 === 0){
+            console.log(i);
+        }
     }
 }
 async function getTheData(generator){
@@ -76,7 +81,7 @@ async function getTheData(generator){
         if(!(await generator.next()).done){
             setTimeout(async () => {
                 getTheData(generator)
-            }, THIRTY_MIN);
+            }, TWO_MIN);
         }else{
             console.log('Emailing');
             transporter.sendMail({

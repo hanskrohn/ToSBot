@@ -28,7 +28,7 @@ mongoose.connect(process.env.MONGO_ATLAS, {
 
 const ALL_SERVICES_SLUGS = [];
 const TWO_MIN = 2 * 60 * 1000;
-let amountOfDataAdded = 0;
+let amountOfDataAdded = 0; // 146
 
 async function main(){
     try{

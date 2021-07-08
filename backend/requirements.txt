@@ -1,0 +1,6 @@
+Flask
+flask-restful  
+python-dotenv  
+requests  
+pymongo 
+pymongo[srv]

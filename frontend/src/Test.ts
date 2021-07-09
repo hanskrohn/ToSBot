@@ -1,5 +1,5 @@
-const test = (): void => {
+const TEST = (): void => {
   console.log('test');
 };
-
-test();
+const FAILURE_PLEASE = { x: 1 };
+TEST();

@@ -4,7 +4,7 @@ import requests
 from controller.temp import TempClass
 
 class TempTestCase(unittest.TestCase):
-    # comment to test tests
+    # testing
     def test_get_response(self):
         expected_result = {"data": "Hello World"}
         self.assertEqual(TempClass.HelloWorld(), expected_result)

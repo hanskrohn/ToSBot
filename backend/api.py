@@ -13,7 +13,7 @@ def mongodb_conn():
     try:
         client = pymongo.MongoClient(os.environ.get("MONGO_ATLAS"))
 
-        print("Succesfully connected to Mongo.")
+        print("Successfully connected to Mongo.")
     except Exception as e:
         print("Could not connect to server: %s" % e)
 

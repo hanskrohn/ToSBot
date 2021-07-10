@@ -1,3 +1,8 @@
+# this script is same as datacleaner.py but will eliminate (not write) snippets that are:
+# - NOT English
+# - have quote lengths < 20 characters
+# - have quote lengths > 1000 characters
+
 import pymongo
 import os
 from dotenv import load_dotenv
@@ -62,11 +67,24 @@ for case in caseList:
     dirtyString = snippet['quoteText']
     dirtyString = cleanHTML(dirtyString)
     cleanString = cleanSpacing(dirtyString)
+
+    # write and check length of cleaned string
+    snippet['charLength'] = len(cleanString)
+    if snippet['charLength'] < 20 or snippet['charLength'] > 1000:
+      case['snippets'].remove(snippet)
+      continue
+
+    # write and check language of cleaned string
+    snippet['language'] = detectLanguage(cleanString)['langName']
+    if snippet['language'] != 'English':
+      case['snippets'].remove(snippet)
+      continue
+
     # replace the value with the cleaned string
     snippet['quoteText'] = cleanString
     snippet['language'] = detectLanguage(cleanString)['langName']
-    # char length as a field
-    snippet['charLength'] = len(cleanString)
+
+    # for understanding data
     totalChars += len(cleanString)
     numSnippets += 1
     if len(cleanString) < minCharLength:
@@ -84,4 +102,4 @@ print("minCharLength: " + str(minCharLength))
 print("maxCharLenght: " + str(maxCharLength)) 
 
 # write caseList to new mongoDB collection
-db['cleaneddatas'].insert_many(caseList)
+db['cleaneddataswithexclusions'].insert_many(caseList)

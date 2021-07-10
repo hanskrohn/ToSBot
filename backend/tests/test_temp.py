@@ -1,11 +1,13 @@
 import unittest
 import requests
 
+from controller.temp import TempClass
+
 class TempTestCase(unittest.TestCase):
+    # testing
     def test_get_response(self):
-        response = requests.get("http://127.0.0.1:5000/temp")
         expected_result = {"data": "Hello World"}
-        self.assertEqual(response.json(), expected_result)
+        self.assertEqual(TempClass.HelloWorld(), expected_result)
 
 
 if __name__ == "__main__":

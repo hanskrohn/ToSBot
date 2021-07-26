@@ -62,6 +62,7 @@
         "format": ["UPPER_CASE"]
       },
       { "selector": "variable", "modifiers": ["const"], "format": ["PascalCase", "camelCase"] },
+      { "selector": "function", "format": ["PascalCase", "camelCase"] },
       { "selector": "typeLike", "format": ["PascalCase"] },
       { "selector": "memberLike", "format": ["camelCase"] },
       { "selector": "enumMember", "format": ["PascalCase"] },

@@ -6,6 +6,7 @@
     "plugin:@typescript-eslint/recommended",
     "prettier" // Must be last to override
   ],
+  "root": true,
   "parser": "@typescript-eslint/parser",
   "plugins": ["@typescript-eslint", "prettier", "jsdoc", "filenames"],
   "env": {
@@ -61,14 +62,22 @@
         "modifiers": ["global", "const"],
         "format": ["UPPER_CASE"]
       },
-      { "selector": "variable", "modifiers": ["const"], "format": ["PascalCase", "camelCase"] },
+      {
+        "selector": "variable",
+        "modifiers": ["const"],
+        "format": ["PascalCase", "camelCase"]
+      },
       { "selector": "function", "format": ["PascalCase", "camelCase"] },
       { "selector": "typeLike", "format": ["PascalCase"] },
       { "selector": "memberLike", "format": ["camelCase"] },
       { "selector": "enumMember", "format": ["PascalCase"] },
       { "selector": "variableLike", "format": ["camelCase"] },
       { "selector": "variable", "modifiers": ["destructured"], "format": null },
-      { "selector": "parameter", "format": ["camelCase"], "leadingUnderscore": "allow" }
+      {
+        "selector": "parameter",
+        "format": ["camelCase"],
+        "leadingUnderscore": "allow"
+      }
     ]
   },
   "settings": {

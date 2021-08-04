@@ -14,7 +14,7 @@ Once you reach chrome://extensions/, in the top right of the page you should see
 
 The workflow for this extension is a little strange and I will be looking into improving it. At the moment, everytime you want to see the updates you will need to:
 
-1. Run `npm build`
+1. Run `npm run build`
 2. Visit chrome://extensions/
 3. Hit the reload button on the extension
 

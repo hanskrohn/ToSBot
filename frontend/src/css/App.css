@@ -14,4 +14,7 @@
 
 .grey-container-borders {
   border: 2px solid #ebebeb;
-  border-radius: 15px; }
+  border-radius: 5px; }
+
+.margin-small {
+  margin: 2px; }

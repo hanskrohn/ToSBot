@@ -18,6 +18,10 @@
 }
 
 .grey-container-borders {
-  border: 2px solid $grey-border-color;
-  border-radius: 15px;
+  border: $grey-border;
+  border-radius: 5px;
+}
+
+.margin-small {
+  margin: 2px;
 }

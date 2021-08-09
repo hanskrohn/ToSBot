@@ -4,7 +4,7 @@ import '../css/HighlightButton.css';
 import { FaHighlighter } from 'react-icons/fa';
 
 /** Component that renders the highligh text button */
-const HighlightButton: React.FC<any> = () => {
+const HighlightButton: React.FC = () => {
   // TODO: Send Request to API with highlighted information
   const [inHighlightMode, setInHighlightMode] = useState<boolean>(false);
   const [buttonText, setButtonText] = useState<string>('Enable Manual Text Highlight');

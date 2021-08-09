@@ -5,7 +5,7 @@ import { Searching } from './Searching';
 import { Grade, Grades } from './Grade';
 
 /** Summary Component, Displays Pie Chart, Cases found, and Overall Grade */
-const Summary: React.FC<any> = () => {
+const Summary: React.FC = () => {
   // TODO: Get rid of this logic beneath, this is just here to show what the components looks like by switching through them
   const components = [
     <Searching />,

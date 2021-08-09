@@ -1,3 +1,24 @@
+@import './Variables.scss';
+
 .highlight-button-container {
   height: 12%;
+  color: white;
+  box-shadow: $drop-shadow;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+}
+
+.enable {
+  background-color: $blue-primary;
+}
+
+.disable {
+  background-color: $blue-secondary;
+}
+
+.highlight-button-container:hover {
+  cursor: pointer;
 }

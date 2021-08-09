@@ -23,4 +23,16 @@
   margin-top: 5px;
   margin-bottom: 5px;
   font-size: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.expand-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.expand-card:hover {
+  cursor: pointer;
 }

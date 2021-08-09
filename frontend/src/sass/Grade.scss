@@ -1,8 +1,4 @@
-$excellent: #1a7800;
-$good: #58a942;
-$neutral: #f5c451;
-$bad: #ce5347;
-$awful: #780000;
+@import './Variables.scss';
 
 .excellent {
   color: $excellent;

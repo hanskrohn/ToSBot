@@ -1,2 +1,18 @@
 .highlight-button-container {
-  height: 12%; }
+  height: 12%;
+  color: white;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px; }
+
+.enable {
+  background-color: #50b5ff; }
+
+.disable {
+  background-color: #400169; }
+
+.highlight-button-container:hover {
+  cursor: pointer; }

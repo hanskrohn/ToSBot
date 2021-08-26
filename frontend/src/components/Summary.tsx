@@ -9,11 +9,9 @@ const Summary: React.FC = () => {
   // TODO: Get rid of this logic beneath, this is just here to show what the components looks like by switching through them
   const components = [
     <Searching />,
-    <Grade grade={Grades.Excellent} />,
     <Grade grade={Grades.Good} />,
     <Grade grade={Grades.Neutral} />,
     <Grade grade={Grades.Bad} />,
-    <Grade grade={Grades.Awful} />,
   ];
   const [index, setIndex] = useState<number>(0);
   const [display, setDisplay] = useState<JSX.Element>(<Searching />);

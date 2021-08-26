@@ -15,6 +15,7 @@ $container-width: 120px;
 .content {
   color: $subheader-grey;
   display: flex;
+  align-items: center;
 }
 
 .options {
@@ -28,6 +29,7 @@ $container-width: 120px;
   z-index: 999;
   align-items: center;
   color: $subheader-grey;
+  cursor: pointer;
 }
 
 .option {
@@ -37,7 +39,11 @@ $container-width: 120px;
 }
 
 .option p {
-  margin-left: 5px;
+  margin-left: 3px;
+}
+
+.content p {
+  margin-left: 3px;
 }
 
 .checkbox {

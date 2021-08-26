@@ -1,0 +1,65 @@
+@import './Variables.scss';
+
+$container-width: 120px;
+
+.dropdown-button {
+  font-size: 12px;
+  display: flex;
+  border: $grey-border;
+  border-radius: 5px;
+  width: $container-width;
+  padding: 3px;
+  justify-content: space-between;
+}
+
+.content {
+  color: $subheader-grey;
+  display: flex;
+  align-items: center;
+}
+
+.options {
+  font-size: 12px;
+  padding: 3px;
+  width: $container-width;
+  background-color: white;
+  border: $grey-border;
+  border-radius: 5px;
+  position: absolute;
+  z-index: 999;
+  align-items: center;
+  color: $subheader-grey;
+  cursor: pointer;
+}
+
+.option {
+  display: flex;
+  margin: 5px 0;
+  align-items: center;
+}
+
+.option p {
+  margin-left: 3px;
+}
+
+.content p {
+  margin-left: 3px;
+}
+
+.checkbox {
+  height: 10px;
+  width: 10px;
+  border: 1px solid $grey;
+  border-radius: 3px;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.clicked {
+  background-color: $grey;
+}
+.flip-upside-down {
+  transform: scale(1, -1);
+}

@@ -1,6 +1,17 @@
 .results-container {
   height: 65%;
   margin: 10px 0;
+}
+
+.filter-container {
+  height: 10%;
+  display: flex;
+  justify-content: space-around;
+  padding-top: 5px;
+}
+
+.results {
   overflow: hidden;
   overflow-y: auto;
+  height: calc(90% - 5px);
 }

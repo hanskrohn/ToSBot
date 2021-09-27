@@ -4,7 +4,6 @@ class ProcessHTML:
     def init(html):
       data = ProcessHTML.cleanHTML(html)
       # Here we would want to call the ML Model
-      print(data)
       return {"cards" : data}
     
     def cleanHTML(html):

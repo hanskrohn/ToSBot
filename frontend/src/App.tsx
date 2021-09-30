@@ -8,12 +8,15 @@ import { HighlightButton } from './components/HighlightButton';
 /** Function to Load React App */
 function App(): JSX.Element {
   const [show, setShow] = useState<boolean>(true);
+  const [d, sd] = useState<any>(null);
 
   useEffect(() => {
     const html = document.documentElement.outerHTML;
+    console.log(html);
     const data = { html };
     const abortCtrl = new AbortController();
-
+    sd(html);
+    console.log(data);
     fetch('http://127.0.0.1:5000/api', {
       method: 'POST',
       headers: {
@@ -39,6 +42,7 @@ function App(): JSX.Element {
       {show && <Summary />}
       <Results />
       <HighlightButton />
+      {d?.toString()}
     </div>
   );
 }

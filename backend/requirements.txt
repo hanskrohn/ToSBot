@@ -4,3 +4,5 @@ python-dotenv
 requests  
 pymongo 
 pymongo[srv]
+beautifulsoup4
+flask-cors

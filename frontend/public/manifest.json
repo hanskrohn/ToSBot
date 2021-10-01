@@ -3,20 +3,14 @@
   "description": "Base Level Extension",
   "version": "1.0",
   "manifest_version": 2,
-  "permissions": ["storage", "active tab", "declarativeContent"],
-  "browser_action": {
-    "default_popup": "index.html",
-    "default_title": "Open ToSBot"
-  },
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
-      "js": ["content.js"]
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["background.js"]
     }
   ],
-  "icons": {
-    "16": "logo192.png",
-    "48": "logo192.png",
-    "128": "logo192.png"
+  "browser_action": {
+    "default_popup": "index.html",
+    "default_title": "see suggestions for this site"
   }
 }

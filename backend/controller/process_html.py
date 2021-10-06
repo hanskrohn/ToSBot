@@ -1,10 +1,11 @@
 from bs4 import BeautifulSoup
+from annotate_terms import get_annotation
 
 class ProcessHTML:
     def init(html):
       data = ProcessHTML.cleanHTML(html)
-      # Here we would want to call the ML Model
-      return {"cards" : data}
+      annotated_terms = get_annotation(data)
+      return {"cards" : annotated_terms}
     
     def cleanHTML(html):
       soup = BeautifulSoup(html, "html.parser") # create a new bs4 object from the html data loaded

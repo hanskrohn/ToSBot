@@ -5,8 +5,7 @@ import { Summary } from './components/Summary';
 import { Results } from './components/Results';
 import { HighlightButton } from './components/HighlightButton';
 import { getDomContent } from './background.js';
-import { CardsProvider } from './context/CardsProvider';
-import { getHTML } from './temp';
+import { getHTML } from './htmlContent';
 
 /** Function to Load React App */
 function App(): JSX.Element {
@@ -14,11 +13,7 @@ function App(): JSX.Element {
   const [dom, setDom] = useState<string>();
 
   useEffect(() => {
-    const p = getDomContent();
-    alert(typeof p);
-
-    p.then(() => {
-      alert('bye');
+    getDomContent().then(() => {
       setDom(getHTML());
     });
     // const html = document.documentElement.outerHTML;
@@ -46,9 +41,7 @@ function App(): JSX.Element {
   return (
     <div className="container">
       {show && <Summary />}
-      <CardsProvider>
-        <Results />
-      </CardsProvider>
+      <Results />
       <HighlightButton />
       {dom}
     </div>

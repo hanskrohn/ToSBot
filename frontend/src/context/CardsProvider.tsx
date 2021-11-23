@@ -1,5 +1,5 @@
 import React, { createContext, useState, FC } from 'react';
-import { CardsObject, CardProps } from '../types';
+import { CardsObject } from '../types';
 
 interface CardsContextState {
   cards: CardsObject;

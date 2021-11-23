@@ -4,8 +4,9 @@ import './css/App.css';
 import { Summary } from './components/Summary';
 import { Results } from './components/Results';
 import { HighlightButton } from './components/HighlightButton';
-import { getDomContent } from './background.jsx';
+import { getDomContent } from './background.js';
 import { CardsProvider } from './context/CardsProvider';
+import { getHTML } from './temp';
 
 /** Function to Load React App */
 function App(): JSX.Element {
@@ -13,7 +14,13 @@ function App(): JSX.Element {
   const [dom, setDom] = useState<string>();
 
   useEffect(() => {
-    const x = getDomContent();
+    const p = getDomContent();
+    alert(typeof p);
+
+    p.then(() => {
+      alert('bye');
+      setDom(getHTML());
+    });
     // const html = document.documentElement.outerHTML;
     // const data = { html };
     // const abortCtrl = new AbortController();

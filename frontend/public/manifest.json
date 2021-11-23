@@ -5,7 +5,7 @@
   "content_scripts": [
     {
       "matches": ["http://*/*", "https://*/*"],
-      "js": ["background.jsx"]
+      "js": ["background.js"]
     }
   ],
   "action": {

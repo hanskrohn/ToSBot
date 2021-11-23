@@ -65,7 +65,7 @@ module.exports = {
   proxySetup: resolveApp('src/setupProxy.js'),
   appNodeModules: resolveApp('node_modules'),
   swSrc: resolveModule(resolveApp, 'src/service-worker'),
-  backgroundScript: resolveApp('src/background.jsx'),
+  backgroundScript: resolveApp('src/background.js'),
   publicUrlOrPath,
 };
 

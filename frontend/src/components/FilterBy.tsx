@@ -6,7 +6,7 @@ import { IoMdArrowDropdown } from 'react-icons/io';
 import '../css/Filters.css';
 import '../css/Grade.css';
 
-import { Grades } from './Grade';
+import { Grades } from '../types';
 
 interface FilterByProps {
   setFilterBy: React.Dispatch<React.SetStateAction<Set<Grades>>>;

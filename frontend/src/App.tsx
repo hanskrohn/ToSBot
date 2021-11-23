@@ -4,7 +4,8 @@ import './css/App.css';
 import { Summary } from './components/Summary';
 import { Results } from './components/Results';
 import { HighlightButton } from './components/HighlightButton';
-import { getDomContent } from './background';
+import { getDomContent } from './background.js';
+import { getHTML } from './htmlContent';
 
 /** Function to Load React App */
 function App(): JSX.Element {
@@ -12,14 +13,12 @@ function App(): JSX.Element {
   const [dom, setDom] = useState<string>();
 
   useEffect(() => {
-    const x = getDomContent().toString();
-
-    setDom(x);
-
+    getDomContent().then(() => {
+      setDom(getHTML());
+    });
     // const html = document.documentElement.outerHTML;
     // const data = { html };
     // const abortCtrl = new AbortController();
-
     // fetch('http://127.0.0.1:5000/api', {
     //   method: 'POST',
     //   headers: {
@@ -36,7 +35,6 @@ function App(): JSX.Element {
     //   .then((res) => {
     //     console.log(res);
     //   });
-
     // return () => abortCtrl.abort();
   }, []);
 

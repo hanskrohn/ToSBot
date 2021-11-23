@@ -5,13 +5,11 @@ import { Card } from './Card';
 import { Grades, CardProps } from '../types';
 import { OrderByStates } from './OrderBy';
 import { Filters } from './Filters';
-import { CardsContext } from '../context/CardsProvider';
 
 /** Components that displays the result cards of the TOS */
 const Results: React.FC = () => {
   const [filterBy, setFilterBy] = useState<Set<Grades>>(new Set<Grades>([Grades.Good, Grades.Bad, Grades.Neutral]));
   const [orderBy, setOrderBy] = useState<OrderByStates>(OrderByStates.AsTheyAppear);
-  const { cards } = useContext(CardsContext);
 
   /** TODO: This function will be removed and replaced with actual grades attached to each case */
   const createList = () => {

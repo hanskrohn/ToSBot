@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 
 import '../css/Results.css';
-import { Searching } from './Searching';
-import { Card, CardProps } from './Card';
-import { Grades } from './Grade';
+import { Card } from './Card';
+import { Grades, CardProps } from '../types';
 import { OrderByStates } from './OrderBy';
 import { Filters } from './Filters';
 
@@ -40,13 +39,13 @@ const Results: React.FC = () => {
     const num = Math.floor(Math.random() * 3);
     return cases[num] ?? Grades.Neutral;
   }; // TODO: This will removed and replaced with actuall cases
-  const [cards, setCards] = useState<CardProps[]>(createList());
+  const [cardsS, setCards] = useState<CardProps[]>(createList());
 
   /** Function to filter the list of cards by the selected filters */
   const filterTempCards = (): CardProps[] => {
     const newList: CardProps[] = [];
 
-    cards.forEach((card) => {
+    cardsS.forEach((card) => {
       if (filterBy.has(card.grade)) {
         newList.push(card);
       }
@@ -125,7 +124,7 @@ const Results: React.FC = () => {
       </div>
       {/* <Searching displaySearchingText /> */}
       <div className="results">
-        {cards.map((card, i) => {
+        {cardsS.map((card, i) => {
           return (
             <div key={i} className="margin-small">
               <Card caseBlur={card.caseBlur} grade={card.grade} quote={card.quote} />

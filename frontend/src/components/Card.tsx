@@ -2,6 +2,7 @@ import React from 'react';
 
 import '../css/Card.css';
 import { Grade, Grades } from './Grade';
+import { CaseExpansion } from './CaseExpansion';
 import { HiOutlineArrowDown, HiOutlineArrowUp } from 'react-icons/hi';
 import { useState } from 'react';
 
@@ -61,14 +62,17 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
         </div>
       </div>
       {expandableButton === collapse && (
-        <div className="card-content-container flex">
-          <div className="card-subtitle">
-            <h5>Quote:</h5>
+        <>
+          <div className="card-content-container flex">
+            <div className="card-subtitle">
+              <h5>Quote:</h5>
+            </div>
+            <div className="card-content">
+              <p>{quote}</p>
+            </div>
           </div>
-          <div className="card-content">
-            <p>{quote}</p>
-          </div>
-        </div>
+          <CaseExpansion case={caseBlur} quote={quote} />
+        </>
       )}
     </div>
   );

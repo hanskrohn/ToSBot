@@ -13,6 +13,7 @@ const Results: React.FC = () => {
   const [orderBy, setOrderBy] = useState<OrderByStates>(OrderByStates.AsTheyAppear);
 
   /** TODO: This function will be removed and replaced with actual grades attached to each case */
+  /** TODO: move cases to React State, and we also need to store upvote/downvote state locally */
   const createList = () => {
     const list = [];
     for (let i = 0; i < 100; i++) {

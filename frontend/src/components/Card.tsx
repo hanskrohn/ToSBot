@@ -1,10 +1,11 @@
 import React from 'react';
 
 import '../css/Card.css';
-import { Grade, Grades } from './Grade';
+import { Grade } from './Grade';
 import { CaseExpansion } from './CaseExpansion';
 import { HiOutlineArrowDown, HiOutlineArrowUp } from 'react-icons/hi';
 import { useState } from 'react';
+import { CardProps } from '../types';
 
 const expand: JSX.Element = (
   <>
@@ -19,12 +20,6 @@ const collapse: JSX.Element = (
     <HiOutlineArrowUp />
   </>
 );
-
-export interface CardProps {
-  caseBlur: string;
-  grade: Grades;
-  quote: string;
-}
 
 /** Card component to display card */
 const Card: React.FC<CardProps> = (props: CardProps) => {

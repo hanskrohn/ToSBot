@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Grades } from './Grade';
+import { Grades } from '../types';
 import { FilterBy } from './FilterBy';
 import { OrderBy, OrderByStates } from './OrderBy';
 

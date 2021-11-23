@@ -1,15 +1,10 @@
 import React from 'react';
 
 import '../css/Grade.css';
+import { Grades } from '../types';
 
 interface GradeProps {
   grade: Grades;
-}
-
-export enum Grades {
-  Good = 'Good',
-  Neutral = 'Neutral',
-  Bad = 'Bad',
 }
 
 /** Component to display Grades */

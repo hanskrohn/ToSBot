@@ -81,7 +81,7 @@
     "start:js": "node scripts/start.js",
     "start": "npm-run-all -p watch:css start:js",
     "build:css": "node-sass src/sass/ -o src/css/ ",
-    "build:js": "INLINE_RUNTIME_CHUNK=false node scripts/build.js",
+    "build:js": "cross-env INLINE_RUNTIME_CHUNK=false node scripts/build.js",
     "build": "npm-run-all build:*",
     "test": "node scripts/test.js",
     "lint": "eslint . --ext .js,.ts"

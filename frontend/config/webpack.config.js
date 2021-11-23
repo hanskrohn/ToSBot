@@ -640,7 +640,7 @@ module.exports = function (webpackEnv) {
     entry: [paths.backgroundScript],
     output: {
       path: paths.appBuild,
-      filename: 'background.js',
+      filename: 'background.jsx',
     },
     plugins: [new MinifyPlugin({}, {})],
   };

@@ -3,29 +3,23 @@ import '../css/CaseExpansion.css';
 import { HiOutlineThumbUp, HiOutlineThumbDown, HiThumbUp, HiThumbDown } from 'react-icons/hi';
 
 export interface CardExpansionProps {
-  case: string;
+  case_string: string;
   quote: string;
+  hasVoted: boolean;
+  voteType: string;
+  voteSubmitHandler: (case_text: string, source_text: string, voteType: string) => void;
 }
 
 /** CardExpansionUI component displays Show in TOS and upvote/downvote UI */
 const CaseExpansion: React.FC<CardExpansionProps> = (props: CardExpansionProps) => {
+  const { case_string, quote, hasVoted, voteType, voteSubmitHandler } = props;
   const [upvoteHover, setUpvoteHover] = useState(false);
   const [downvoteHover, setDownvoteHover] = useState(false);
 
-  const [hasVoted, setHasVoted] = useState(false);
-  const [voteType, setVoteType] = useState(null);
-
   /** Handler function fired when a vote is submitted by user */
-  const onVoteClickHandler = (voteType: string) => {
+  const onVoteClickHandler = (voteType: 'upvote' | 'downvote') => {
     if (!hasVoted) {
-      setHasVoted(true);
-      if (voteType == 'upvote') {
-        console.log('Upvote fired!');
-        setVoteType('upvote');
-      } else {
-        console.log('Downvote fired!');
-        setVoteType('downvote');
-      }
+      voteSubmitHandler(case_string, quote, voteType);
     } else {
       return;
     }

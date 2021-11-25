@@ -1,121 +1,109 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import '../css/Results.css';
 import { Card } from './Card';
-import { Grades, CardProps } from '../types';
+import { Grades, caseObject } from '../types';
 import { OrderByStates } from './OrderBy';
 import { Filters } from './Filters';
 
+interface IProps {
+  cases: caseObject[];
+}
+
 /** Components that displays the result cards of the TOS */
-const Results: React.FC = () => {
+const Results: React.FC<IProps> = (props) => {
   const [filterBy, setFilterBy] = useState<Set<Grades>>(new Set<Grades>([Grades.Good, Grades.Bad, Grades.Neutral]));
   const [orderBy, setOrderBy] = useState<OrderByStates>(OrderByStates.AsTheyAppear);
+  const [clientIP, setClientIP] = useState<string | null>(null);
 
-  /** TODO: This function will be removed and replaced with actual grades attached to each case */
-  /** TODO: move cases to React State, and we also need to store upvote/downvote state locally */
-  const createList = () => {
-    const list = [];
-    for (let i = 0; i < 100; i++) {
-      list.push({
-        caseBlur: ` Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos accusantium architecto sint facere!
-        Sed quos consectetur incidunt mollitia rem dignissimos nulla ullam cum iure veniam harum officia dicta,
-        fugiat ex.`,
-        grade: getRandomGrade(),
-        quote: ` Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos accusantium architecto sint facere!
-        Sed quos consectetur incidunt mollitia rem dignissimos nulla ullam cum iure veniam harum officia dicta,
-        fugiat ex.`,
-      });
-    }
+  // state to manage the display order of cases. Defaults to what was initially provided (as they appear)
+  const [sortedArray, setSortedArray] = useState<caseObject[] | null>(props.cases);
 
-    return list;
-  };
-
-  const getRandomGrade = (): Grades => {
-    const cases = {
-      0: Grades.Good,
-      1: Grades.Bad,
-      2: Grades.Neutral,
-    };
-    const num = Math.floor(Math.random() * 3);
-    return cases[num] ?? Grades.Neutral;
-  }; // TODO: This will removed and replaced with actuall cases
-  const [cardsS, setCards] = useState<CardProps[]>(createList());
+  // state to save the "as they appear" initial order. We need a copy because it gets manipulated at runtime.
+  const [asTheyAppearArray, setAsTheyAppearArray] = useState<caseObject[] | null>(props.cases);
 
   /** Function to filter the list of cards by the selected filters */
-  const filterTempCards = (): CardProps[] => {
-    const newList: CardProps[] = [];
+  const filterTempCards = (): caseObject[] => {
+    const newList: caseObject[] = [];
+    const freshArray = [...asTheyAppearArray];
+    freshArray.forEach((card) => {
+      let cardGrade: Grades;
+      if (card.severity == 1) cardGrade = Grades.Good;
+      else if (card.severity == 2) cardGrade = Grades.Neutral;
+      else cardGrade = Grades.Bad;
 
-    cardsS.forEach((card) => {
-      if (filterBy.has(card.grade)) {
+      if (filterBy.has(cardGrade)) {
         newList.push(card);
       }
     });
-
     return newList;
   };
 
   /** Determine order of sorting and sort the cards */
-  const sortCards = (cards: CardProps[]): CardProps[] => {
+  const sortCards = (cards: caseObject[]): caseObject[] => {
     if (orderBy === OrderByStates.AsTheyAppear) {
-      return cards;
+      const freshArray = [...asTheyAppearArray];
+      const returnArray: caseObject[] = [];
+      for (let i = 0; i < freshArray.length; i++) {
+        if (cards.includes(freshArray[i])) {
+          returnArray.push(freshArray[i]);
+        }
+      }
+      return returnArray;
     }
-
-    let order: Grades[];
-    if (orderBy === OrderByStates.GoodToBad) {
-      order = [Grades.Good, Grades.Neutral, Grades.Bad];
+    // see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
+    else if (orderBy === OrderByStates.GoodToBad) {
+      return cards.sort((a, b) => a.severity - b.severity);
     } else {
-      order = [Grades.Bad, Grades.Neutral, Grades.Good];
+      return cards.sort((a, b) => b.severity - a.severity);
     }
-
-    return sort(cards, order);
   };
 
-  /**
-   * Sorts the cards[] according to the order provided. Only works if order is of length 3
-   *
-   * @param cards - CardProps[] you want to sort
-   * @param order - The order you want to sorth them in
-   * @returns - Sorted CardProps[]
-   */
-  const sort = (cards: CardProps[], order: Grades[]): CardProps[] => {
-    const firstValue = order[0];
-    const secondValue = order[1];
+  // vote handler which submit vote to POST endpoint and then update table
+  // will use https://www.bigdatacloud.com/customer/account this service to get client IP to send to BE
+  // backend will implement IP-based rate limit throttling
+  // TBD on whether or not to store IP and force unique IP for upvotes/downvote writing to Mongo
+  const hasVotedHandler = (case_text: string, source_text: string, voteType: 'upvote' | 'downvote') => {
+    console.log('TODO: upvote/downvote submit endpoint');
+    const tempSortedArray = [...sortedArray];
+    const tempAsTheyAppearArray = [...asTheyAppearArray];
 
-    let firstIdx = 0;
-    let secondIdx = 0;
-    let thirdIdx = cards.length - 1;
-
-    while (secondIdx <= thirdIdx) {
-      const currCard = cards[secondIdx];
-
-      if (currCard.grade === firstValue) {
-        swap(firstIdx, secondIdx, cards);
-        firstIdx++;
-        secondIdx++;
-      } else if (currCard.grade === secondValue) {
-        secondIdx++;
-      } else {
-        swap(secondIdx, thirdIdx, cards);
-        thirdIdx--;
+    for (let i = 0; i < tempSortedArray.length; i++) {
+      if (tempSortedArray[i].source_text === source_text) {
+        tempSortedArray[i].has_voted = true;
+        tempSortedArray[i].vote_type = voteType;
+      }
+      if (tempAsTheyAppearArray[i].source_text === source_text) {
+        tempAsTheyAppearArray[i].has_voted = true;
+        tempAsTheyAppearArray[i].vote_type = voteType;
       }
     }
-
-    return cards;
-  };
-
-  /** Swap Cards in cards array */
-  const swap = (i: number, j: number, cards: CardProps[]): void => {
-    const temp = cards[i];
-    cards[i] = cards[j];
-    cards[j] = temp;
+    setSortedArray([...tempSortedArray]);
+    setAsTheyAppearArray([...tempAsTheyAppearArray]);
   };
 
   useEffect(() => {
     const newCardList = filterTempCards();
     const newCardOrder = sortCards(newCardList);
-
-    setCards([...newCardOrder]);
+    setSortedArray([...newCardOrder]);
   }, [filterBy, orderBy]);
+
+  useEffect(() => {
+    const abortCtrl = new AbortController();
+    fetch('http://ip-api.com/json', {
+      method: 'GET',
+      signal: abortCtrl.signal,
+    }).then(
+      (res) => {
+        res.json().then((data) => {
+          setClientIP(data.query);
+        });
+      },
+      (err) => {
+        console.error('Failed to resolve client IP address, ' + err);
+      }
+    );
+  }, []);
 
   return (
     <div className="results-container grey-container-borders">
@@ -124,10 +112,10 @@ const Results: React.FC = () => {
       </div>
       {/* <Searching displaySearchingText /> */}
       <div className="results">
-        {cardsS.map((card, i) => {
+        {sortedArray.map((card, i) => {
           return (
             <div key={i} className="margin-small">
-              <Card caseBlur={card.caseBlur} grade={card.grade} quote={card.quote} />
+              <Card card={card} voteSubmitHandler={hasVotedHandler} />
             </div>
           );
         })}

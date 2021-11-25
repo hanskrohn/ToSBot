@@ -1,10 +1,10 @@
 from bs4 import BeautifulSoup
-from annotate_terms import get_annotation
+from .annotate_terms import get_annotation
 
 class ProcessHTML:
     def init(html):
       data = ProcessHTML.cleanHTML(html)
-      annotated_terms = get_annotation(data)
+      annotated_terms = get_annotation(data, 5)
       return {"cards" : annotated_terms}
     
     def cleanHTML(html):

@@ -1,8 +1,13 @@
+import random
+
+numbers = [1,2,3]
+
 ## TO DO: Decide if the % match threshold is going to be enforced wihtin the ML functions or in one of these
 
 def query_model(sentence, match_threshold):
     # Some ML magic
-    case_obj = {'severity': 3, 'case_text': 'Hello world', 'match_confidence':0.6}
+    randomSeverity = random.choice(numbers)
+    case_obj = {'severity': randomSeverity, 'case_text': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eros, ut ultrices condimentum rhoncus ultrices urna.', 'match_confidence':0.6}
     return case_obj # includes generalized case, severity, match %, any other information
 
 def get_annotation(terms_text, match_threshold):

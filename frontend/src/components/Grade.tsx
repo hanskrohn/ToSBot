@@ -1,25 +1,18 @@
 import React from 'react';
 
 import '../css/Grade.css';
-import { Grades } from '../types';
 
 interface GradeProps {
-  grade: Grades;
+  grade: number;
 }
 
 /** Component to display Grades */
 const Grade: React.FC<GradeProps> = (props: GradeProps) => {
   const { grade } = props;
 
-  if (grade === Grades.Good) {
-    return <h3 className="good">{Grades.Good}</h3>;
-  }
+  const gradeArray = ['Good', 'Neutral', 'Bad'];
 
-  if (grade === Grades.Bad) {
-    return <h3 className="bad">{Grades.Bad}</h3>;
-  }
-
-  return <h3 className="neutral">Neutral</h3>;
+  return <h3 className={gradeArray[grade - 1].toLowerCase()}>{gradeArray[grade - 1]}</h3>;
 };
 
 export { Grade };

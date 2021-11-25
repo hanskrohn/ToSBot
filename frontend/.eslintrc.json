@@ -21,14 +21,10 @@
     "project": "./tsconfig.json"
   },
   "rules": {
-    "prettier/prettier": "error",
-    "no-console": "warn",
     "quotes": ["error", "single", { "avoidEscape": true, "allowTemplateLiterals": true }],
     "no-return-await": "warn",
     "no-eval": "error",
     "no-restricted-syntax": "error",
-    "filenames/match-regex": ["error", "index|^[A-Z][a-z]", true],
-    "filenames/match-exported": "warn",
     "jsdoc/require-jsdoc": [
       "warn",
       {
@@ -45,40 +41,7 @@
     "jsdoc/require-param-type": "off",
     "jsdoc/require-return-type": "off",
     "jsdoc/require-param": "off",
-    "jsdoc/require-returns": "off",
-    "@typescript-eslint/naming-convention": [
-      "error",
-      {
-        "selector": "interface",
-        "format": ["PascalCase"],
-        "custom": {
-          "regex": "^I[A-Z]",
-          "match": false
-        }
-      },
-      {
-        "selector": "variable",
-        "types": ["boolean", "string", "number"],
-        "modifiers": ["global", "const"],
-        "format": ["UPPER_CASE"]
-      },
-      {
-        "selector": "variable",
-        "modifiers": ["const"],
-        "format": ["PascalCase", "camelCase"]
-      },
-      { "selector": "function", "format": ["PascalCase", "camelCase"] },
-      { "selector": "typeLike", "format": ["PascalCase"] },
-      { "selector": "memberLike", "format": ["camelCase"] },
-      { "selector": "enumMember", "format": ["PascalCase"] },
-      { "selector": "variableLike", "format": ["camelCase"] },
-      { "selector": "variable", "modifiers": ["destructured"], "format": null },
-      {
-        "selector": "parameter",
-        "format": ["camelCase"],
-        "leadingUnderscore": "allow"
-      }
-    ]
+    "jsdoc/require-returns": "off"
   },
   "settings": {
     "jsdoc": {

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { GrFormCheckmark } from 'react-icons/gr';
-import { BsFilter } from 'react-icons/bs';
+import { GrFilter } from 'react-icons/gr';
 import { IoMdArrowDropdown } from 'react-icons/io';
 
 import '../css/Filters.css';
@@ -27,7 +27,7 @@ const FilterBy: React.FC<FilterByProps> = (props: FilterByProps) => {
     <>
       <div className="dropdown-button" role="button" onClick={toggleSeeOptions}>
         <div className="content">
-          <BsFilter />
+          <GrFilter color="#888" />
           <p>Filter By...</p>
         </div>
         <div>

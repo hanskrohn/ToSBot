@@ -25,6 +25,7 @@
     "bfj": "^7.0.2",
     "camelcase": "^6.1.0",
     "case-sensitive-paths-webpack-plugin": "2.3.0",
+    "cross-env": "^7.0.3",
     "css-loader": "4.3.0",
     "dotenv": "8.2.0",
     "dotenv-expand": "5.1.0",
@@ -81,7 +82,7 @@
     "start:js": "node scripts/start.js",
     "start": "npm-run-all -p watch:css start:js",
     "build:css": "node-sass src/sass/ -o src/css/ ",
-    "build:js": "INLINE_RUNTIME_CHUNK=false node scripts/build.js",
+    "build:js": "cross-env INLINE_RUNTIME_CHUNK=false node scripts/build.js",
     "build": "npm-run-all build:*",
     "test": "node scripts/test.js",
     "lint": "eslint . --ext .js,.ts"

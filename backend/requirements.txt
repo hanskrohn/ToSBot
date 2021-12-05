@@ -6,3 +6,8 @@ pymongo
 pymongo[srv]
 beautifulsoup4
 flask-cors
+sklearn
+numpy
+xgboost
+tensorflow_hub
+tensorflow

@@ -39,7 +39,7 @@ function App(): JSX.Element {
               caseObj.vote_type = null;
             }
             setCaseData(stateData);
-            // setIsLoading(false);
+            setIsLoading(false);
           });
         },
         (err) => {

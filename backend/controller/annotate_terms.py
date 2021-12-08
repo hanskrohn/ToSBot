@@ -41,19 +41,26 @@ def query_model(sentence, match_threshold):
     #Create DMatrix
     dtest = xgb.DMatrix(test_numpy)
 
-    prediction_num = loaded_model.predict(dtest)
+    confidence_scores_all_cases = loaded_model.predict(dtest)
+
+    max_confidence = max(confidence_scores_all_cases[0])    
+
+
+    prediction_num = list(confidence_scores_all_cases[0]).index(max_confidence)
 
     # print(prediction_num)
 
     prediction_text  = label_encoder.inverse_transform([int(prediction_num)])
 
-    # print(prediction_text)
-
-    case_obj = {'severity': randomSeverity, 'case_text': prediction_text[0], 'match_confidence':0.6}
-
-    # print(case_obj)
+    print(prediction_text, max_confidence)
     
-    return case_obj # includes generalized case, severity, match %, any other information
+    if max_confidence > match_threshold:
+        case_obj = {'severity': randomSeverity, 'case_text': prediction_text[0]}
+    
+    else:
+        case_obj = None
+    
+    return case_obj 
 
 def get_annotation(terms_text, match_threshold):
     sentences = terms_text.split('.')
@@ -84,4 +91,9 @@ def get_cases(sentences_list, match_threshold):
                 'source_text': sentence,
                 'has_case': False})
 
+    print(text_to_case_mapping)
+
     return text_to_case_mapping
+
+
+# get_cases(["Cookies", "Cookiesdfksdlfkhlses"], 0.80)

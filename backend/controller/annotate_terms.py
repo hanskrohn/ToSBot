@@ -11,24 +11,20 @@ numbers = [1,2,3]
 
 module_url = "https://tfhub.dev/google/universal-sentence-encoder/4" 
 sentence_encoder_model = hub.load(module_url)
-print (f"module {module_url} loaded")
+print (f"Module loaded: {module_url}")
+
 """Load the encoder used in version of model to be loaded"""
-
 label_encoder = preprocessing.LabelEncoder()
-# label_encoder.classes_ = np.load('encoder_classes.npy')
-label_encoder.classes_ = np.load(r"C:\Users\Admin\Undergrad\Eng\Fourth Year\Capstone\TOSD-Data-Parser\backend\controller\encoder_classes.npy")
-
+label_encoder.classes_ = np.load(r'.\controller\encoder_classes.npy') 
 
 # load serialized model from file
 model_datetime = "('20210818155130', {'max_depth': 7, 'n_estimators': 1000, 'eta': 1, 'verbosity': 3, 'objective': 'multi:softmax', 'num_class': 38})"
 
 loaded_model = xgb.Booster()
-# loaded_model.load_model("model.bin") r"C:\Users\Admin\Undergrad\Eng\Fourth Year\Capstone\TOSD-Data-Parser\backend\controller\model.bin"
-loaded_model.load_model(r"C:\Users\Admin\Undergrad\Eng\Fourth Year\Capstone\TOSD-Data-Parser\backend\controller\model.bin") 
+loaded_model.load_model(r'.\controller\model.bin')
 
-print(loaded_model)
+print(f'Model loaded: {loaded_model}')
 
-## TO DO: Decide if the % match threshold is going to be enforced wihtin the ML functions or in one of these
 
 def embed(input):
   return sentence_encoder_model(input)
@@ -47,15 +43,15 @@ def query_model(sentence, match_threshold):
 
     prediction_num = loaded_model.predict(dtest)
 
-    print(prediction_num)
+    # print(prediction_num)
 
     prediction_text  = label_encoder.inverse_transform([int(prediction_num)])
 
-    print(prediction_text)
+    # print(prediction_text)
 
+    case_obj = {'severity': randomSeverity, 'case_text': prediction_text[0], 'match_confidence':0.6}
 
-    # case_obj = {'severity': randomSeverity, 'case_text': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eros, ut ultrices condimentum rhoncus ultrices urna.', 'match_confidence':0.6}
-    case_obj = {'severity': randomSeverity, 'case_text': prediction_text, 'match_confidence':0.6}
+    # print(case_obj)
     
     return case_obj # includes generalized case, severity, match %, any other information
 
@@ -88,7 +84,4 @@ def get_cases(sentences_list, match_threshold):
                 'source_text': sentence,
                 'has_case': False})
 
-    # debug_text_to_case_mapping(text_to_case_mapping) # comment out for production
-    return text_to_case_mapping 
-
-# get_annotation('Hello there. This is my tos text feel free to debug with it', .75)
+    return text_to_case_mapping

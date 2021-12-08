@@ -18,3 +18,10 @@
 
 .margin-small {
   margin: 4px; }
+
+div#summary-loading {
+  height: 14%; }
+
+div#results-loading {
+  height: 72%;
+  margin: 10px 0; }

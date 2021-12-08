@@ -1,14 +1,14 @@
 @import './Variables.scss';
 
 .highlight-button-container {
-  height: 12%;
+  height: 30px;
   color: white;
   box-shadow: $drop-shadow;
   border-radius: 5px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 15px;
+  font-size: 14px;
 }
 
 .enable {

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import './css/App.css';
 import { Summary } from './components/Summary';
 import { Results } from './components/Results';
+import { Searching } from './components/Searching';
 import { HighlightButton } from './components/HighlightButton';
 import { getDomContent } from './background.js';
 import { getHTML } from './htmlContent';
@@ -51,8 +52,20 @@ function App(): JSX.Element {
 
   return (
     <div className="container">
-      {!isLoading && <Summary />}
-      {!isLoading && <Results cases={caseData.cards} />}
+      {isLoading ? (
+        <div id="summary-loading" className="grey-container-borders">
+          <Searching displaySearchingText={false} />
+        </div>
+      ) : (
+        <Summary />
+      )}
+      {isLoading ? (
+        <div id="results-loading" className="grey-container-borders">
+          <Searching displaySearchingText={true} />
+        </div>
+      ) : (
+        <Results cases={caseData.cards} />
+      )}
       <HighlightButton />
     </div>
   );

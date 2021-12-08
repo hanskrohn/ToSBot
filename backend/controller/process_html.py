@@ -4,7 +4,7 @@ from .annotate_terms import get_annotation
 class ProcessHTML:
     def init(html):
       data = ProcessHTML.cleanHTML(html)
-      annotated_terms = get_annotation(data, 5)
+      annotated_terms = get_annotation(data, 0.75)
       return {"cards" : annotated_terms}
     
     def cleanHTML(html):

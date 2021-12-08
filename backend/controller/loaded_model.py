@@ -4,8 +4,6 @@ import numpy as np
 import xgboost as xgb
 import tensorflow_hub as hub
 
-
-
 """Load Google Universal Sentence Encoder model"""
 
 module_url = "https://tfhub.dev/google/universal-sentence-encoder/4"

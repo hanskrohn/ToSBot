@@ -11,7 +11,7 @@ interface IProps {
 }
 
 /** Components that displays the result cards of the TOS */
-const Results: React.FC<IProps> = (props) => {
+const Results: React.FC<IProps> = (props: IProps) => {
   const [filterBy, setFilterBy] = useState<Set<Grades>>(new Set<Grades>([Grades.Good, Grades.Bad, Grades.Neutral]));
   const [orderBy, setOrderBy] = useState<OrderByStates>(OrderByStates.AsTheyAppear);
   const [clientIP, setClientIP] = useState<string | null>(null);

@@ -1,5 +1,5 @@
 import React from 'react';
-import { CgSearchLoading } from 'react-icons/cg';
+import { CgSearch } from 'react-icons/cg';
 
 import '../css/Searching.css';
 
@@ -13,7 +13,15 @@ const Searching: React.FC<SearchingProps> = (props: SearchingProps) => {
 
   return (
     <div className="stack-grow">
-      <CgSearchLoading className="magnifying-glass" />
+      <div id="animated-icon">
+        <CgSearch className="magnifying-glass" />
+        <div className="lds-ellipsis">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
       {displaySearchingText && <p className="searching-text">Searching TOS...</p>}
     </div>
   );

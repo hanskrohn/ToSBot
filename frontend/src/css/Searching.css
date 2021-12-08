@@ -4,12 +4,56 @@
   height: 100%;
   justify-content: center;
   align-items: center; }
+  .stack-grow div#animated-icon {
+    position: relative; }
+  .stack-grow .magnifying-glass {
+    font-size: 50px;
+    color: #979797; }
+  .stack-grow .searching-text {
+    padding-top: 15px;
+    font-size: 15px;
+    color: #979797;
+    font-weight: bold; }
+  .stack-grow .lds-ellipsis {
+    display: inline-block;
+    position: absolute;
+    top: 8px;
+    left: 15.5px; }
+  .stack-grow .lds-ellipsis div {
+    position: absolute;
+    top: 10px;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: #979797;
+    animation-timing-function: cubic-bezier(0, 1, 1, 0); }
+  .stack-grow .lds-ellipsis div:nth-child(1) {
+    left: 2px;
+    animation: lds-ellipsis1 0.6s infinite; }
+  .stack-grow .lds-ellipsis div:nth-child(2) {
+    left: 2px;
+    animation: lds-ellipsis2 0.6s infinite; }
+  .stack-grow .lds-ellipsis div:nth-child(3) {
+    left: 8px;
+    animation: lds-ellipsis2 0.6s infinite; }
+  .stack-grow .lds-ellipsis div:nth-child(4) {
+    left: 14px;
+    animation: lds-ellipsis3 0.6s infinite; }
 
-.magnifying-glass {
-  font-size: 40px;
-  color: #979797; }
+@keyframes lds-ellipsis1 {
+  0% {
+    transform: scale(0); }
+  100% {
+    transform: scale(1); } }
 
-.searching-text {
-  padding-top: 15px;
-  font-size: 15px;
-  color: #979797; }
+@keyframes lds-ellipsis3 {
+  0% {
+    transform: scale(1); }
+  100% {
+    transform: scale(0); } }
+
+@keyframes lds-ellipsis2 {
+  0% {
+    transform: translate(0, 0); }
+  100% {
+    transform: translate(6px, 0); } }

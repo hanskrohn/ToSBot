@@ -8,10 +8,15 @@
   display: flex;
   justify-content: space-around;
   padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 .results {
   overflow: hidden;
   overflow-y: auto;
-  height: calc(90% - 5px);
+  height: calc(100% - 7.5% - 10px);
+}
+
+.results::-webkit-scrollbar {
+  width: 5px;
 }

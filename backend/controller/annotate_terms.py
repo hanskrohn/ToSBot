@@ -63,7 +63,7 @@ def query_model(sentence, match_threshold):
     return case_obj 
 
 def get_annotation(terms_text, match_threshold):
-    sentences = terms_text.split('.')
+    sentences = terms_text.split('|')
 
     annotation_obj = get_cases(sentences, match_threshold)
 

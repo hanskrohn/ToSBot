@@ -119,6 +119,9 @@ const Results: React.FC<IProps> = (props: IProps) => {
             </div>
           );
         })}
+        {props.cases.length === 0 ? (
+          <p id="no-cases">Uh oh! I couldn't automatically detect a ToS. Can you try manually highlighting?</p>
+        ) : null}
       </div>
     </div>
   );

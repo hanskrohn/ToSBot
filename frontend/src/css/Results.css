@@ -6,9 +6,20 @@
   height: 7.5%;
   display: flex;
   justify-content: space-around;
-  padding-top: 5px; }
+  padding-top: 5px;
+  padding-bottom: 5px; }
 
 .results {
   overflow: hidden;
   overflow-y: auto;
-  height: calc(90% - 5px); }
+  height: calc(100% - 7.5% - 10px); }
+  .results p#no-cases {
+    font-size: 14px;
+    color: #888888;
+    padding: 20px;
+    font-weight: bold;
+    text-align: center;
+    width: 100%; }
+
+.results::-webkit-scrollbar {
+  width: 5px; }

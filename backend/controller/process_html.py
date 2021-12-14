@@ -2,8 +2,6 @@ from .annotate_terms import get_annotation
 
 class ProcessHTML:
     def init(html):
-      print("THIS IS THE HTML:::")
-      print(html)
       annotated_terms = get_annotation(html, 0.75)
       return {"cards" : annotated_terms}
     

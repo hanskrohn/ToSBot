@@ -57,7 +57,7 @@ function App(): JSX.Element {
           <Searching displaySearchingText={false} />
         </div>
       ) : (
-        <Summary />
+        <Summary cases={caseData.cards}/>
       )}
       {isLoading ? (
         <div id="results-loading" className="grey-container-borders">

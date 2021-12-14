@@ -35,19 +35,19 @@ const Summary: React.FC<IProps> = (props: IProps) => {
   if (numCases < 10) {
     overallRating = 'Neutral';
     insufficientDataFlag = true;
-  }
-  if (averageScore < 2.4 && averageScore > 1.6) {
+  } else if (averageScore < 2.4 && averageScore > 1.6) {
     overallRating = 'Neutral';
   } else if (averageScore >= 2.4) {
-    overallRating = 'Good';
-  } else if (averageScore <= 1.6) {
     overallRating = 'Bad';
+  } else if (averageScore <= 1.6) {
+    overallRating = 'Good';
   }
 
   const generalResponse =
     'I parsed the TOS and mapped specific sentences to predefined common cases. I was trained with data collected from https://tosdr.org/.';
 
   const infoToolTipResponses = {
+    nocases: 'Uh-oh! TOSBot is having trouble reading this page. Can you try the manual highlighting button?',
     neutral_insufficientData: 'The overall rating on this TOS is neutral because there was insuffucient data.',
     neutral: "The overall rating on this TOS is neutral. It's not bad, but not good either.",
     bad: 'The overall rating on this TOS is bad. You should be careful about using this service!',
@@ -55,7 +55,9 @@ const Summary: React.FC<IProps> = (props: IProps) => {
   };
 
   const getToolTipResponse = () => {
-    if (overallRating == 'Neutral') {
+    if (numCases == 0) {
+      return infoToolTipResponses.nocases;
+    } else if (overallRating == 'Neutral') {
       if (insufficientDataFlag) {
         return infoToolTipResponses.neutral_insufficientData;
       } else {
@@ -76,7 +78,9 @@ const Summary: React.FC<IProps> = (props: IProps) => {
         </div>
         <div className="infobox">
           <h4>Overall Score</h4>
-          <div className={'score ' + overallRating.toLowerCase()}>{overallRating}</div>
+          <div className={'score ' + (numCases > 0 ? overallRating.toLowerCase() : '')}>
+            {numCases > 0 ? overallRating : '-'}
+          </div>
         </div>
         <div className="infobox">
           <h4>Cases Found</h4>
@@ -107,7 +111,7 @@ const Summary: React.FC<IProps> = (props: IProps) => {
           return { top, left };
         }}
       >
-        <span id="tooltip-content">{getToolTipResponse() + ' ' + generalResponse}</span>
+        <span id="tooltip-content">{getToolTipResponse() + (numCases > 0 ? ' ' + generalResponse : '')}</span>
       </ReactTooltip>
     </div>
   );

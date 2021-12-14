@@ -13,6 +13,13 @@
   overflow: hidden;
   overflow-y: auto;
   height: calc(100% - 7.5% - 10px); }
+  .results p#no-cases {
+    font-size: 14px;
+    color: #888888;
+    padding: 20px;
+    font-weight: bold;
+    text-align: center;
+    width: 100%; }
 
 .results::-webkit-scrollbar {
   width: 5px; }

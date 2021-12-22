@@ -8,7 +8,6 @@ import os
 numbers = [1,2,3]
 
 """Load Google Universal Sentence Encoder model"""
-
 module_url = "https://tfhub.dev/google/universal-sentence-encoder/4" 
 sentence_encoder_model = hub.load(module_url)
 print (f"Module loaded: {module_url}")
@@ -17,12 +16,9 @@ print (f"Module loaded: {module_url}")
 label_encoder = preprocessing.LabelEncoder()
 label_encoder.classes_ = np.load(r'.\controller\encoder_classes.npy') 
 
-# load serialized model from file
-model_datetime = "('20210818155130', {'max_depth': 7, 'n_estimators': 1000, 'eta': 1, 'verbosity': 3, 'objective': 'multi:softmax', 'num_class': 38})"
-
+"""Load model"""
 loaded_model = xgb.Booster()
 loaded_model.load_model(r'.\controller\model.bin')
-
 print(f'Model loaded: {loaded_model}')
 
 
@@ -96,4 +92,4 @@ def get_cases(sentences_list, match_threshold):
     return text_to_case_mapping
 
 
-# get_cases(["Cookies", "Cookiesdfksdlfkhlses"], 0.80)
+# get_cases(["Cookies", "Cookiesdfksdlfkhlses"], 0.80)64.29

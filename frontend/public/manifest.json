@@ -12,6 +12,6 @@
     "default_popup": "index.html"
   },
   "manifest_version": 3,
-  "permissions": ["scripting", "tabs", "notifications"],
+  "permissions": ["scripting", "tabs", "notifications", "storage"],
   "host_permissions": ["*://*/*"]
 }

@@ -104,3 +104,38 @@ export function getWebsiteURL() {
     });
   });
 }
+
+export function highlightText(text) {
+  const highlight = (text) => {
+    const rawText = document.body.innerHTML;
+    const regex = new RegExp('\\b(' + text + ')\\b', 'ig');
+    const newRawText = rawText.replace(regex, `<span style=" background-color:#8a4000;">${text}</span>`);
+    document.body.innerHTML = newRawText;
+  };
+
+  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+    let tab = tabs[0];
+    chrome.scripting.executeScript({
+      target: { tabId: tab.id },
+      func: highlight,
+      args: [text],
+    });
+  });
+}
+
+// keywords.addEventListener('click', function (event) {
+//   var target = event.target;
+//   for(var i = 0; i < context.length; i++) {
+//       var item = context[i], text = item.textContent, featuredWords = item.querySelectorAll('.featured-word'), words = Array.prototype.slice.call(featuredWords, 0).map(function(node) {
+//           return node.textContent;
+//         }), regex = new RegExp('\\b(' + target.textContent + ')\\b', 'ig');
+
+//       text = text.replace(regex, '<span class="highlight">$1</span>');
+//       // put the bolded words back
+// words.forEach(function(word) {
+//          text = text.replace(word, '<span class="featured-word">'+word+'</span>');
+//       });
+
+//       item.innerHTML = text;
+//   }
+// }, false);

@@ -7,7 +7,8 @@ import os
 import pymongo
 import requests
 
-from routes.routes import Routes
+from routes.cases import Cases
+from routes.votes import Votes
 
 load_dotenv()
 
@@ -23,7 +24,8 @@ app = Flask(__name__)
 cors = CORS(app)
 api = Api(app)
 
-api.add_resource(Routes, '/api')
+api.add_resource(Cases, '/api')
+api.add_resource(Votes, '/vote')
 
 if __name__ == '__main__':
     mongodb_conn()

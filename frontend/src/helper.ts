@@ -10,3 +10,13 @@ export function setHTML(resHTML) {
 export function getHTML() {
   return html;
 }
+
+let url = '';
+
+export function setURL(resURL) {
+  url = resURL;
+}
+
+export function getURL() {
+  return url;
+}

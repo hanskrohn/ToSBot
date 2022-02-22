@@ -4,7 +4,7 @@
 /* eslint-disable no-undef */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 // eslint-disable-next-line filenames/match-regex
-import { setHTML } from './htmlContent.ts';
+import { setHTML, setURL } from './helper.ts';
 
 export function getDomContent() {
   return new Promise((resolve, reject) => {
@@ -63,7 +63,7 @@ export function getDomContent() {
       return sentenceSeparatedArray.join('|');
     }
 
-    chrome.tabs.query({ active: true }, function (tabs) {
+    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
       let tab = tabs[0];
       chrome.scripting.executeScript(
         {
@@ -73,6 +73,30 @@ export function getDomContent() {
         (injectionResults) => {
           for (const frameResult of injectionResults) {
             setHTML(frameResult.result);
+          }
+          resolve();
+        }
+      );
+    });
+  });
+}
+
+export function getWebsiteURL() {
+  const getTOSurl = () => {
+    return window.location.href;
+  };
+
+  return new Promise((resolve, reject) => {
+    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+      let tab = tabs[0];
+      chrome.scripting.executeScript(
+        {
+          target: { tabId: tab.id },
+          func: getTOSurl,
+        },
+        (injectionResults) => {
+          for (const frameResult of injectionResults) {
+            setURL(frameResult.result);
           }
           resolve();
         }

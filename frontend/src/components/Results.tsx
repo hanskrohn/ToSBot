@@ -65,7 +65,6 @@ const Results: React.FC<IProps> = (props: IProps) => {
   // backend will implement IP-based rate limit throttling
   // TBD on whether or not to store IP and force unique IP for upvotes/downvote writing to Mongo
   const hasVotedHandler = (case_text: string, source_text: string, voteType: 'upvote' | 'downvote') => {
-    console.log('TODO: upvote/downvote submit endpoint');
     const tempSortedArray = [...sortedArray];
     const tempAsTheyAppearArray = [...asTheyAppearArray];
 
@@ -109,6 +108,7 @@ const Results: React.FC<IProps> = (props: IProps) => {
           clientIP: clientIP,
           uuid: uuid,
           url: siteURL,
+          timestamp: Date.now(),
         }),
       }).then(
         (res) => {

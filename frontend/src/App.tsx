@@ -6,7 +6,7 @@ import { Summary } from './components/Summary';
 import { Results } from './components/Results';
 import { Searching } from './components/Searching';
 import { HighlightButton } from './components/HighlightButton';
-import { getDomContent, getWebsiteURL } from './background.js';
+import { getDomContent, getWebsiteURL } from './background';
 import { getHTML, getURL } from './helper';
 import { caseObject } from './types';
 
@@ -17,7 +17,8 @@ function App(): JSX.Element {
 
   useEffect(() => {
     const abortCtrl = new AbortController();
-    /*
+
+    /* 
       TOSBOT client-side caching solution to minimize API calls and store UUID
     */
     // check if user has a UUID and previously loaded cases for the website, if so, check the timestamp.
@@ -52,12 +53,20 @@ function App(): JSX.Element {
             if (res['ToSBot-user-data'].websites[TOSurl].timestamp > Date.now() - 86400000) {
               setCaseData(res['ToSBot-user-data'].websites[TOSurl].caseData);
               setIsLoading(false);
+            } else {
+              // if it is stale then query the API
+              queryAPI();
             }
           } else {
+            // if the key is not found then user hasn't visited site yet, just query
             queryAPI();
           }
         }
       });
+
+      /*
+        This function queries the backend model for snippets and then caches the result.
+      */
       const queryAPI = () => {
         getDomContent().then(() => {
           const html = getHTML();
@@ -83,13 +92,13 @@ function App(): JSX.Element {
                 }
                 setCaseData(stateData);
                 setIsLoading(false);
+
                 chrome.storage.local.get('ToSBot-user-data', (res) => {
                   const resCopy = { ...res }['ToSBot-user-data'];
                   resCopy.websites[TOSurl] = { timestamp: Date.now(), caseData: stateData };
                   console.log(resCopy);
                   // update user storage with latest data
                   chrome.storage.local.set({ 'ToSBot-user-data': resCopy });
-                  // for
                 });
               });
             },
@@ -100,6 +109,7 @@ function App(): JSX.Element {
         });
       };
     });
+
     return () => abortCtrl.abort();
   }, []);
 

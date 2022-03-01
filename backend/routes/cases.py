@@ -3,7 +3,7 @@ from flask import request
 
 from controller.process_html import ProcessHTML
 
-class Routes(Resource):
+class Cases(Resource):
     def post(self):
         data = request.json
         # print(data)

@@ -1,10 +1,11 @@
+/*global chrome*/
 import React, { useState, useEffect } from 'react';
-
 import '../css/Results.css';
 import { Card } from './Card';
 import { Grades, caseObject } from '../types';
 import { OrderByStates } from './OrderBy';
 import { Filters } from './Filters';
+import { getURL } from '../helper';
 
 interface IProps {
   cases: caseObject[];
@@ -64,7 +65,6 @@ const Results: React.FC<IProps> = (props: IProps) => {
   // backend will implement IP-based rate limit throttling
   // TBD on whether or not to store IP and force unique IP for upvotes/downvote writing to Mongo
   const hasVotedHandler = (case_text: string, source_text: string, voteType: 'upvote' | 'downvote') => {
-    console.log('TODO: upvote/downvote submit endpoint');
     const tempSortedArray = [...sortedArray];
     const tempAsTheyAppearArray = [...asTheyAppearArray];
 
@@ -80,6 +80,45 @@ const Results: React.FC<IProps> = (props: IProps) => {
     }
     setSortedArray([...tempSortedArray]);
     setAsTheyAppearArray([...tempAsTheyAppearArray]);
+
+    // after FE state management to update hasVoted, fire request to backend
+    chrome.storage.local.get(['ToSBot-user-data'], (res) => {
+      // write upvote/downvote states to local storage (caching them)
+      // this means that if the user opens ToSBot on the same site in a day, their upvotes and downvotes are preserved
+      // its impractical to store them for longer in case the model is updated and the snippets change
+      const resCopy = { ...res }['ToSBot-user-data'];
+      const siteURL = getURL();
+      const oldTimeStamp = resCopy.websites[siteURL].timestamp;
+      resCopy.websites[siteURL] = { timestamp: oldTimeStamp, caseData: { cards: tempAsTheyAppearArray } };
+      // update user storage with latest data
+      chrome.storage.local.set({ 'ToSBot-user-data': resCopy });
+
+      const uuid = res['ToSBot-user-data'].uuid;
+      fetch('http://127.0.0.1:5000/vote', {
+        method: 'POST',
+        headers: {
+          // eslint-disable-next-line @typescript-eslint/naming-convention
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          case_text: case_text,
+          source_text: source_text,
+          voteType: voteType,
+          // ip and uuid are used to secure API against abuse and perform checks
+          clientIP: clientIP,
+          uuid: uuid,
+          url: siteURL,
+          timestamp: Date.now(),
+        }),
+      }).then(
+        (res) => {
+          console.log(res);
+        },
+        (err) => {
+          console.error(err);
+        }
+      );
+    });
   };
 
   useEffect(() => {

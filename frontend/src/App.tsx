@@ -6,7 +6,7 @@ import { Summary } from './components/Summary';
 import { Results } from './components/Results';
 import { Searching } from './components/Searching';
 import { HighlightButton } from './components/HighlightButton';
-import { getDomContent, getWebsiteURL } from './background.js';
+import { getDomContent, getWebsiteURL } from './background';
 import { getHTML, getURL } from './helper';
 import { caseObject } from './types';
 

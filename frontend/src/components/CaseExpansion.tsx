@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import '../css/CaseExpansion.css';
 import { HiOutlineThumbUp, HiOutlineThumbDown, HiThumbUp, HiThumbDown } from 'react-icons/hi';
+import { highlightText } from '../background';
 
 export interface CardExpansionProps {
   case_string: string;
@@ -27,7 +28,9 @@ const CaseExpansion: React.FC<CardExpansionProps> = (props: CardExpansionProps) 
 
   return (
     <div id="case-expansion-id">
-      <button id="show-in-tos-button">Show in TOS</button>
+      <button id="show-in-tos-button" onClick={() => highlightText(quote)}>
+        Show in TOS
+      </button>
       <div id="help-tosbot-learn-prompt">
         <p>
           {!hasVoted ? (

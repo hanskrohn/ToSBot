@@ -104,3 +104,25 @@ export function getWebsiteURL() {
     });
   });
 }
+
+export function highlightText(text) {
+  const highlight = (text) => {
+    const rawText = document.body.innerHTML;
+    // Regex expression that finds text provided using zero word asserition (\b) and case insensitve
+    // might be able to replace it to use \w
+    const regex = new RegExp('\\b(' + text + ')\\b', 'ig');
+    // Replace text in DOM with same text wrapped in highlighted span
+    const newRawText = rawText.replace(regex, `<span style=" background-color:#8a4000;">${text}</span>`);
+    // paste new HTML on DOM
+    document.body.innerHTML = newRawText;
+  };
+
+  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+    let tab = tabs[0];
+    chrome.scripting.executeScript({
+      target: { tabId: tab.id },
+      func: highlight,
+      args: [text],
+    });
+  });
+}

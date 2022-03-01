@@ -108,8 +108,12 @@ export function getWebsiteURL() {
 export function highlightText(text) {
   const highlight = (text) => {
     const rawText = document.body.innerHTML;
+    // Regex expression that finds text provided using zero word asserition (\b) and case insensitve
+    // might be able to replace it to use \w
     const regex = new RegExp('\\b(' + text + ')\\b', 'ig');
+    // Replace text in DOM with same text wrapped in highlighted span
     const newRawText = rawText.replace(regex, `<span style=" background-color:#8a4000;">${text}</span>`);
+    // paste new HTML on DOM
     document.body.innerHTML = newRawText;
   };
 
@@ -122,20 +126,3 @@ export function highlightText(text) {
     });
   });
 }
-
-// keywords.addEventListener('click', function (event) {
-//   var target = event.target;
-//   for(var i = 0; i < context.length; i++) {
-//       var item = context[i], text = item.textContent, featuredWords = item.querySelectorAll('.featured-word'), words = Array.prototype.slice.call(featuredWords, 0).map(function(node) {
-//           return node.textContent;
-//         }), regex = new RegExp('\\b(' + target.textContent + ')\\b', 'ig');
-
-//       text = text.replace(regex, '<span class="highlight">$1</span>');
-//       // put the bolded words back
-// words.forEach(function(word) {
-//          text = text.replace(word, '<span class="featured-word">'+word+'</span>');
-//       });
-
-//       item.innerHTML = text;
-//   }
-// }, false);

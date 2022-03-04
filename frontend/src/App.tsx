@@ -87,6 +87,7 @@ function App(): JSX.Element {
                   caseObj.has_voted = false;
                   caseObj.vote_type = null;
                 }
+                console.log(stateData);
                 setCaseData(stateData);
                 setIsLoading(false);
                 chrome.storage.local.get('ToSBot-user-data', (res) => {

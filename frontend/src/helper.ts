@@ -14,7 +14,10 @@ export function getHTML() {
 let url = '';
 
 export function setURL(resURL) {
-  url = resURL;
+  let urlWithHash = resURL;
+  // remove any # portion from URL (relevant sometimes)
+  urlWithHash = urlWithHash.split('#')[0];
+  url = urlWithHash;
 }
 
 export function getURL() {

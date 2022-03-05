@@ -113,7 +113,8 @@ const Results: React.FC<IProps> = (props: IProps) => {
       }).then(
         (res) => {
           console.log(res);
-          if (process.env.VOTE_DEBUG_MODE == 'true') {
+          console.log(process.env.REACT_APP_VOTE_DEBUG_MODE);
+          if (process.env.REACT_APP_VOTE_DEBUG_MODE == 'true') {
             chrome.storage.local.clear().then(() => {
               console.log('DEBUG MODE: local storage reset');
             });

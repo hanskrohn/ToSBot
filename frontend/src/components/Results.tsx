@@ -113,6 +113,11 @@ const Results: React.FC<IProps> = (props: IProps) => {
       }).then(
         (res) => {
           console.log(res);
+          if (process.env.VOTE_DEBUG_MODE == 'true') {
+            chrome.storage.local.clear().then(() => {
+              console.log('DEBUG MODE: local storage reset');
+            });
+          }
         },
         (err) => {
           console.error(err);

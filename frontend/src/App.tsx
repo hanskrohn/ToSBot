@@ -5,8 +5,7 @@ import './css/App.css';
 import { Summary } from './components/Summary';
 import { Results } from './components/Results';
 import { Searching } from './components/Searching';
-import { HighlightButton } from './components/HighlightButton';
-import { getDomContent, getWebsiteURL } from './background.js';
+import { getDomContent, getWebsiteURL } from './background';
 import { getHTML, getURL } from './helper';
 import { caseObject } from './types';
 
@@ -17,8 +16,7 @@ function App(): JSX.Element {
 
   useEffect(() => {
     const abortCtrl = new AbortController();
-
-    /* 
+    /*
       TOSBOT client-side caching solution to minimize API calls and store UUID
     */
     // check if user has a UUID and previously loaded cases for the website, if so, check the timestamp.
@@ -63,7 +61,6 @@ function App(): JSX.Element {
           }
         }
       });
-
       /*
         This function queries the backend model for snippets and then caches the result.
       */
@@ -90,9 +87,9 @@ function App(): JSX.Element {
                   caseObj.has_voted = false;
                   caseObj.vote_type = null;
                 }
+                console.log(stateData);
                 setCaseData(stateData);
                 setIsLoading(false);
-
                 chrome.storage.local.get('ToSBot-user-data', (res) => {
                   const resCopy = { ...res }['ToSBot-user-data'];
                   resCopy.websites[TOSurl] = { timestamp: Date.now(), caseData: stateData };
@@ -109,7 +106,6 @@ function App(): JSX.Element {
         });
       };
     });
-
     return () => abortCtrl.abort();
   }, []);
 
@@ -129,7 +125,6 @@ function App(): JSX.Element {
       ) : (
         <Results cases={caseData.cards} />
       )}
-      <HighlightButton />
     </div>
   );
 }

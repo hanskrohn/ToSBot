@@ -1,4 +1,7 @@
 {
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "python.pythonPath": "python"
+  "python.pythonPath": "python",
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.python"
+  }
 }

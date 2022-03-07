@@ -12471,7 +12471,11 @@
   "resolved" "https://registry.npmjs.org/uuid/-/uuid-7.0.3.tgz"
   "version" "7.0.3"
 
+<<<<<<< HEAD
 "uuid@^8.3.0", "uuid@^8.3.2":
+=======
+"uuid@^8.3.0":
+>>>>>>> a7e8fc1bc54348905586bd9d765199558d11841f
   "integrity" "sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg=="
   "resolved" "https://registry.npmjs.org/uuid/-/uuid-8.3.2.tgz"
   "version" "8.3.2"

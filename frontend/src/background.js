@@ -104,3 +104,37 @@ export function getWebsiteURL() {
     });
   });
 }
+
+export function highlightText(text) {
+  const highlight = (text) => {
+    function makeid() {
+      var result = '';
+      var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      var charactersLength = characters.length;
+      for (var i = 0; i < 15; i++) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+      }
+      return result;
+    }
+
+    const rawText = document.body.innerHTML;
+    const id = makeid();
+    // Regex expression that finds text provided using zero word asserition (\b) and case insensitve
+    // might be able to replace it to use \w
+    const regex = new RegExp(`${text}`, 'ig');
+    // Replace text in DOM with same text wrapped in highlighted span
+    const newRawText = rawText.replace(regex, `<span id=${id} style="background-color:#8a4000;">${text}</span>`);
+    // paste new HTML on DOM
+    document.body.innerHTML = newRawText;
+    location.hash = '#' + id;
+  };
+
+  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+    let tab = tabs[0];
+    chrome.scripting.executeScript({
+      target: { tabId: tab.id },
+      func: highlight,
+      args: [text],
+    });
+  });
+}

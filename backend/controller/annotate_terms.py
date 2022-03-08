@@ -110,14 +110,16 @@ def debug_text_to_case_mapping(text_to_case_mapping):
 
 def get_cases(sentences_list, match_threshold):
     text_to_case_mapping = []
+    existing_cases = []
     for sentence in sentences_list:
         case = query_model(sentence, match_threshold)
-        if case:
+        if case and case not in existing_cases:
             mapping = {
                 'source_text': sentence,
                 'has_case': True}
             mapping.update(case)
             text_to_case_mapping.append(mapping)
+            existing_cases.append(case)
         else:
             text_to_case_mapping.append({
                 'source_text': sentence,

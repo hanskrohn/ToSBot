@@ -5,7 +5,7 @@ from googleapiclient.discovery import build
 from google.oauth2.service_account import Credentials
 from googleapiclient.http import MediaIoBaseDownload
 
-from retrain_helper import *
+from .retrain_helper import *
 
 def download_model_and_reports(new_model_datetime):
     creds = Credentials.from_service_account_file('tosbot-341910-9c08921c7c2b.json')
